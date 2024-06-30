@@ -1,1 +1,8 @@
 # Password-Generator-RL
+To quantify the strength of the passwords, I have taken into account the length of the passsword, the number of lower case letters in it, upper case, numbers and special characters. Each password is represented as an array of 5 elements each of which is a parameter from the above list. I implemented a password classifier using random forest classification module which gives out 0, 1 or 2 if the password is weak, moderate or strong respectively. 
+Then, I implememented an epsilon-greedy Q-learning algorithm. The state space of the agent is the previously used password, the action is the generated password. The agent gives out arrays of specifications mentioned above and I make use of a random character generator to generate strings accordingly.
+The biggest challenge for me was to create the action space, which is a list of all ordered paors of the above mentioned vectors (without the length entry) with lengths ranging from 5-15. The passwords generated lie in this interval only.
+This mapping made possible the easy indexing when it came to updating the weights in back propagation. 
+As for the reward, I simplyb passed the generated passwords through the random forest classifier and cubed the output. This cubed output is my reward and thus, in the graph plotted above, you see the numbers 0, 1 and 8 but not 0, 1 and 2.
+![image](https://github.com/PseudoDragonMan/Password-Generator-RL/assets/132740618/343627a2-225c-4038-9573-9df8fa0d800c)
+![image](https://github.com/PseudoDragonMan/Password-Generator-RL/assets/132740618/602e82c0-4578-48f7-9407-fad41ac896ca)
